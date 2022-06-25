@@ -34,7 +34,6 @@ function buildGraph(){
   ];
   
   for (let artist of artistsData){
-//    console.log(artist);
     const artistClass = new Artist(artist.id, artist.name, artist.bands, artist.musical_class);
     const node = new Node(artistClass, null);
     mapaDeArtistas.set(node.artist.name, node);
@@ -44,22 +43,45 @@ function buildGraph(){
   for (let band of bandsData){
     const bandClass = new Band(band.id , band.name, band.members, band.genre);
     const node = new Node(null, bandClass);
-    mapaDeArtistas.set(node.band.name, node);
+    mapaDeBandas.set(node.band.name, node);
     graph.addVertex(node);
     for (let member of band.members){
       graph.addEdge(node, mapaDeArtistas.get(member));
     }
   }
-  //A partir daqui o grafo está completo
-  return [graph, mapaDeArtistas];
+  return [graph, mapaDeArtistas, mapaDeBandas];
 } 
 
-function bfs(graph, artist1, artist2, mapaDeArtistas){
-  let lista_de_vertices = [];
-  mapaDeArtistas.get(artist1.name).visited = true;
-
-}
-
+function bfs(graph, artist1, artist2, mapaDeArtistas, mapaDeBandas){
+  let lista_de_arestas = [];
+  let indice = -1;
+  mapaDeArtistas.get(artist1.name).setVisited(true);
+  lista_de_arestas.push([null, mapaDeArtistas.get(artist1.name)])
+  while (indice < lista_de_arestas.length){
+    indice++;
+    if (indice === lista_de_arestas.length){
+      break;
+    }
+    for (let node1 of graph.AdjList.get(lista_de_arestas[indice][1])){
+      if(node1.type == "artist"){
+        if (!mapaDeArtistas.get(node1.getArtist().getName()).getVisited()){
+          lista_de_arestas.push([lista_de_arestas[indice][1], node1]);
+          mapaDeArtistas.get(node1.getArtist().getName()).setVisited(true);
+          if (node1.getArtist() == artist2){
+            return lista_de_arestas;
+          }
+        }
+      }
+      else if(node1.type == "band"){
+        if (!mapaDeBandas.get(node1.getBand().getName()).getVisited()){
+          lista_de_arestas.push([lista_de_arestas[indice][1], node1]);
+          mapaDeBandas.get(node1.getBand().getName()).setVisited(true);
+        }
+      }
+    } 
+  }
+  return lista_de_arestas
+} 
 
 function App() {
   buildGraph()
