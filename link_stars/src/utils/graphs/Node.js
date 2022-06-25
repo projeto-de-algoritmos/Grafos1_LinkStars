@@ -17,6 +17,12 @@ export default class Node{
     this.type = artist ? 'artist' : 'band'
   }
 
+  getVisited(){
+    return this.visited
+  }
+  setVisited(visited){
+    this.visited = visited;
+  }
   getBand(){
     return this.band;
   }
