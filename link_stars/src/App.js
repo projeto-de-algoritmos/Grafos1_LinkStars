@@ -9,12 +9,12 @@ import james_picture from "./assets/james-hetfield.jpeg";
 import kirk_picture from "./assets/kirk-hemmet.jpeg";
 import robert_picture from "./assets/robert-trujillo.jpeg";
 import jason_becker from "./assets/jason-becker.jpeg";
-import metallica_picture from "./assets/metallica.jpg";
+//import metallica_picture from "./assets/metallica.jpg";
 import frank_zappa_picture from "./assets/frank-zappa.jpg";
 import GraphRender from "./components/renderGraph";
 
-const mapaDeArtistas = new Map();
-const mapaDeBandas = new Map();
+const mapOfArtists = new Map();
+const mapOfBands = new Map();
 const tabelaHash = new Map();
 const artistsData = [
   {
@@ -117,7 +117,7 @@ const bandsData = [
       "Lars Ulrich",
       "Dave Mustaine",
     ],
-    picture: metallica_picture,
+    //picture: metallica_picture,
   },
   {
     id: "b_4",
@@ -162,7 +162,7 @@ function buildGraph() {
       artist.picture
     );
     const node = new Node(artistClass, null);
-    mapaDeArtistas.set(node.artist.name, node);
+    mapOfArtists.set(node.artist.name, node);
     graph.addVertex(node);
   }
 
@@ -175,10 +175,10 @@ function buildGraph() {
       band.picture
     );
     const node = new Node(null, bandClass);
-    mapaDeBandas.set(node.band.name, node);
+    mapOfBands.set(node.band.name, node);
     graph.addVertex(node);
     for (let member of band.members) {
-      graph.addEdge(node, mapaDeArtistas.get(member));
+      graph.addEdge(node, mapOfArtists.get(member));
     }
   }
   graph.noOfVertices = graph.AdjList.size;
@@ -186,30 +186,30 @@ function buildGraph() {
 }
 
 function bfs(graph, artist1, artist2) {
-  let lista_de_arestas = [];
+  let ArrayOfEdge = [];
   let indice = -1;
-  mapaDeArtistas.get(artist1.name).setVisited(true);
-  lista_de_arestas.push([null, mapaDeArtistas.get(artist1.name)]);
-  while (indice < lista_de_arestas.length) {
+  mapOfArtists.get(artist1.name).setVisited(true);
+  ArrayOfEdge.push([null, mapOfArtists.get(artist1.name)]);
+  while (indice < ArrayOfEdge.length) {
     indice++;
-    if (indice === lista_de_arestas.length) {
+    if (indice === ArrayOfEdge.length) {
       break;
     }
-    for (let node1 of graph.AdjList.get(lista_de_arestas[indice][1])) {
+    for (let node1 of graph.AdjList.get(ArrayOfEdge[indice][1])) {
       if (node1.type === "artist") {
-        if (!mapaDeArtistas.get(node1.getArtist().getName()).getVisited()) {
-          lista_de_arestas.push([lista_de_arestas[indice][1], node1]);
-          tabelaHash.set(node1, lista_de_arestas.length - 1);
-          mapaDeArtistas.get(node1.getArtist().getName()).setVisited(true);
+        if (!mapOfArtists.get(node1.getArtist().getName()).getVisited()) {
+          ArrayOfEdge.push([ArrayOfEdge[indice][1], node1]);
+          tabelaHash.set(node1, ArrayOfEdge.length - 1);
+          mapOfArtists.get(node1.getArtist().getName()).setVisited(true);
           if (node1.getArtist() === artist2) {
-            return lista_de_arestas;
+            return ArrayOfEdge;
           }
         }
       } else if (node1.type === "band") {
-        if (!mapaDeBandas.get(node1.getBand().getName()).getVisited()) {
-          lista_de_arestas.push([lista_de_arestas[indice][1], node1]);
-          tabelaHash.set(node1, lista_de_arestas.length - 1);
-          mapaDeBandas.get(node1.getBand().getName()).setVisited(true);
+        if (!mapOfBands.get(node1.getBand().getName()).getVisited()) {
+          ArrayOfEdge.push([ArrayOfEdge[indice][1], node1]);
+          tabelaHash.set(node1, ArrayOfEdge.length - 1);
+          mapOfBands.get(node1.getBand().getName()).setVisited(true);
         }
       }
     }
@@ -217,18 +217,18 @@ function bfs(graph, artist1, artist2) {
   return false;
 }
 
-function chooseBranch(lista_de_arestas) {
-  let listaFinal = [];
-  listaFinal.push(lista_de_arestas[lista_de_arestas.length - 1][1]);
-  let element = lista_de_arestas[lista_de_arestas.length - 1][0];
+function chooseBranch(ArrayOfEdge) {
+  let finalList = [];
+  finalList.push(ArrayOfEdge[ArrayOfEdge.length - 1][1]);
+  let element = ArrayOfEdge[ArrayOfEdge.length - 1][0];
   while (tabelaHash.get(element)) {
-    listaFinal.push(element);
+    finalList.push(element);
     if (tabelaHash.get(element)) {
-      element = lista_de_arestas[tabelaHash.get(element)][0];
+      element = ArrayOfEdge[tabelaHash.get(element)][0];
     }
   }
-  listaFinal.push(element);
-  return listaFinal.reverse();
+  finalList.push(element);
+  return finalList.reverse();
 }
 
 function formatBranch(nodeList) {
@@ -247,12 +247,10 @@ function formatBranch(nodeList) {
         y: yPos,
       },
       style: {
-        backgroundSize: "200px",
         backgroundImage: node.getPicture(),
         width: "300px",
         height: "300px",
         fontSize: "20px",
-        shape: "circle",
       },
     };
     finalGraph.push(data1);
@@ -278,11 +276,10 @@ function App() {
   function handler(e) {
     e.preventDefault();
     graph = buildGraph();
-
     tree = bfs(
       graph,
-      mapaDeArtistas.get(art1).getArtist(),
-      mapaDeArtistas.get(art2).getArtist()
+      mapOfArtists.get(art1).getArtist(),
+      mapOfArtists.get(art2).getArtist()
     );
     console.log(tree);
     if (tree) {
@@ -318,7 +315,7 @@ function App() {
           onClick={handler}
         />
       </div>
-      <GraphRender elements={finalGraph} />;
+      <GraphRender elements={finalGraph} />
     </>
   );
 }
