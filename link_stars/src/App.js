@@ -4,152 +4,13 @@ import Band from "./utils/graphs/Band";
 import Graph from "./utils/graphs/Graph";
 import Node from "./utils/graphs/Node";
 import Artist from "./utils/graphs/Artist";
-import dave_picture from "./assets/dave-mustaine.jpeg";
-import james_picture from "./assets/james-hetfield.jpeg";
-import kirk_picture from "./assets/kirk-hemmet.jpeg";
-import robert_picture from "./assets/robert-trujillo.jpeg";
-import jason_becker from "./assets/jason-becker.jpeg";
-//import metallica_picture from "./assets/metallica.jpg";
-import frank_zappa_picture from "./assets/frank-zappa.jpg";
 import GraphRender from "./components/renderGraph";
+import artistsData from "./data/artistData";
+import bandsData from "./data/bandsData";
 
 const mapOfArtists = new Map();
 const mapOfBands = new Map();
-const tabelaHash = new Map();
-const artistsData = [
-  {
-    id: "a_1",
-    name: "Renato Russo",
-    bands: ["Legião Urbana"],
-    musical_class: "Vocalista",
-  },
-  {
-    id: "a_3",
-    name: "James Hetfield",
-    bands: ["Metallica"],
-    musical_class: "vocalist",
-    picture: james_picture,
-  },
-  {
-    id: "a_4",
-    name: "Kirk Hemmet",
-    bands: ["Metallica"],
-    musical_class: "Solo guitarrist",
-    picture: kirk_picture,
-  },
-  {
-    id: "a_5",
-    name: "Lars Ulrich",
-    bands: ["Metallica"],
-    musical_class: "Drummer",
-  },
-  {
-    id: "a_6",
-    name: "Robert Trujillo",
-    bands: ["Metallica"],
-    musical_class: "Bassist",
-    picture: robert_picture,
-  },
-  {
-    id: "a_7",
-    name: "Dave Mustaine",
-    bands: ["Metallica", "Megadeth"],
-    musical_class: "Vocalist",
-    picture: dave_picture,
-  },
-  {
-    id: "a_8",
-    name: "Marty Friedman",
-    bands: ["Metallica", "Cacophony"],
-    musical_class: "Lead guitarrist",
-  },
-  {
-    id: "a_9",
-    name: "Jason Becker",
-    bands: ["Cacophony"],
-    musical_class: "Solo guitarrist",
-    picture: jason_becker,
-  },
-  {
-    id: "a_10",
-    name: "David Lee Roth",
-    bands: ["David Lee Roth Band", "Van Halen"],
-    musical_class: "Vocalist",
-    picture: null,
-  },
-  {
-    id: "a_11",
-    name: "Eddie Van Halen",
-    bands: ["Van Halen"],
-    musical_class: "Lead Guitarrist",
-    picture: null,
-  },
-  {
-    id: "a_12",
-    name: "Steve Vai",
-    bands: ["David Lee Roth Band", "Frank Zappa"],
-    musical_class: "Lead Guitarrist",
-    picture: null,
-  },
-  {
-    id: "a_13",
-    name: "Frank Zappa",
-    bands: ["Frank Zappa"],
-    musical_class: "Vocalist",
-    picture: frank_zappa_picture,
-  },
-];
-const bandsData = [
-  {
-    id: "b_1",
-    name: "Legião Urbana",
-    genre: "Rock",
-    members: ["Renato Russo"],
-  },
-  {
-    id: "b_2",
-    name: "Metallica",
-    genre: "Thrash Metal",
-    members: [
-      "James Hetfield",
-      "Kirk Hemmet",
-      "Robert Trujillo",
-      "Lars Ulrich",
-      "Dave Mustaine",
-    ],
-    //picture: metallica_picture,
-  },
-  {
-    id: "b_4",
-    name: "Megadeth",
-    genre: "Thrash Metal",
-    members: ["Dave Mustaine", "Marty Friedman"],
-  },
-  {
-    id: "b_5",
-    name: "Cacophony",
-    genre: "Neoclassical Metal",
-    members: ["Jason Becker", "Marty Friedman"],
-  },
-  {
-    id: "b_6",
-    name: "Van Halen",
-    genre: "Hard Rock",
-    members: ["Eddie Van Halen", "David Lee Roth"],
-  },
-  {
-    id: "b_7",
-    name: "Frank Zappa",
-    genre: "Jazz Fusion",
-    members: ["Steve Vai", "Frank Zappa"],
-  },
-  {
-    id: "b_8",
-    name: "David Lee Roth Band",
-    genre: "Hard Rock",
-    members: ["Steve Vai", "Jason Becker", "David Lee Roth"],
-  },
-];
+const hashTable = new Map();
 
 function buildGraph() {
   let graph = new Graph();
@@ -199,7 +60,7 @@ function bfs(graph, artist1, artist2) {
       if (node1.type === "artist") {
         if (!mapOfArtists.get(node1.getArtist().getName()).getVisited()) {
           ArrayOfEdge.push([ArrayOfEdge[indice][1], node1]);
-          tabelaHash.set(node1, ArrayOfEdge.length - 1);
+          hashTable.set(node1, ArrayOfEdge.length - 1);
           mapOfArtists.get(node1.getArtist().getName()).setVisited(true);
           if (node1.getArtist() === artist2) {
             return ArrayOfEdge;
@@ -208,7 +69,7 @@ function bfs(graph, artist1, artist2) {
       } else if (node1.type === "band") {
         if (!mapOfBands.get(node1.getBand().getName()).getVisited()) {
           ArrayOfEdge.push([ArrayOfEdge[indice][1], node1]);
-          tabelaHash.set(node1, ArrayOfEdge.length - 1);
+          hashTable.set(node1, ArrayOfEdge.length - 1);
           mapOfBands.get(node1.getBand().getName()).setVisited(true);
         }
       }
@@ -221,22 +82,22 @@ function chooseBranch(ArrayOfEdge) {
   let finalList = [];
   finalList.push(ArrayOfEdge[ArrayOfEdge.length - 1][1]);
   let element = ArrayOfEdge[ArrayOfEdge.length - 1][0];
-  while (tabelaHash.get(element)) {
+  while (hashTable.get(element)) {
     finalList.push(element);
-    if (tabelaHash.get(element)) {
-      element = ArrayOfEdge[tabelaHash.get(element)][0];
+    if (hashTable.get(element)) {
+      element = ArrayOfEdge[hashTable.get(element)][0];
     }
   }
   finalList.push(element);
   return finalList.reverse();
 }
 
-function formatBranch(nodeList) {
+function formatGraph(nodeList) {
   const yPos = 300;
   let xPos = 0;
   let finalGraph = [];
   nodeList.forEach((node) => {
-    xPos += 250;
+    xPos += 200;
     const data1 = {
       data: {
         id: node.getId(),
@@ -247,9 +108,8 @@ function formatBranch(nodeList) {
         y: yPos,
       },
       style: {
-        backgroundImage: node.getPicture(),
-        width: "300px",
-        height: "300px",
+        width: "40px",
+        height: "40px",
         fontSize: "20px",
       },
     };
@@ -271,26 +131,28 @@ function App() {
   const [art2, setArt2] = useState("Kirk Hemmet");
   const [finalGraph, setFinalGraph] = useState([]);
   let graph;
-  let tree;
+  let bfsTree;
   let branch;
   function handler(e) {
     e.preventDefault();
     graph = buildGraph();
-    tree = bfs(
+    bfsTree = bfs(
       graph,
       mapOfArtists.get(art1).getArtist(),
       mapOfArtists.get(art2).getArtist()
     );
-    console.log(tree);
-    if (tree) {
-      branch = chooseBranch(tree);
-      setFinalGraph(formatBranch(branch));
+    if (bfsTree) {
+      branch = chooseBranch(bfsTree);
+      setFinalGraph(formatGraph(branch));
     } else {
       alert("Não há ligação entre esses artistas!");
     }
   }
   return (
     <>
+      <div className="title div" align="center">
+        <h1>Link Stars</h1>
+      </div>
       <div className="select-container" align="center">
         <form>
           <label for="Artista 1">Artista 1</label>
@@ -309,9 +171,9 @@ function App() {
           </select>
         </form>
         <input
-          disabled={art1 == art2}
+          disabled={art1 === art2}
           type="submit"
-          value="Submit"
+          value="Gerar conexão!"
           onClick={handler}
         />
       </div>

@@ -14,8 +14,8 @@ export default class GraphRender extends React.Component {
         elements={elements}
         style={{
           width: "100%",
-          height: "1100px",
-          animation: "reverse",
+          height: "700px",
+          backgroundSize: "100%",
         }}
         layout={layout}
       />
