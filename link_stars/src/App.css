@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+select {
+  width: 250px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+option {
+  width: 250px;
+}
