@@ -98,21 +98,43 @@ function formatGraph(nodeList) {
   let finalGraph = [];
   nodeList.forEach((node) => {
     xPos += 200;
-    const data1 = {
-      data: {
-        id: node.getId(),
-        label: node.getName(),
-      },
-      position: {
-        x: xPos,
-        y: yPos,
-      },
-      style: {
-        width: "40px",
-        height: "40px",
-        fontSize: "20px",
-      },
-    };
+    let data1;
+    if (node.getType() == "artist"){
+      data1 = {
+        data: {
+          id: node.getId(),
+          label: node.getName(),
+        },
+        position: {
+          x: xPos,
+          y: yPos,
+        },
+        style: {
+          width: "40px",
+          height: "40px",
+          fontSize: "20px",
+          "background-color" : 'crimson'
+        },
+      };
+    }
+    else{
+      data1 = {
+        data: {
+          id: node.getId(),
+          label: node.getName(),
+        },
+        position: {
+          x: xPos,
+          y: yPos,
+        },
+        style: {
+          width: "40px",
+          height: "40px",
+          fontSize: "20px",
+          "background-color" : "#00008b"
+        },
+      };
+    }
     finalGraph.push(data1);
   });
   for (let i = 0; i < nodeList.length - 1; i++) {
