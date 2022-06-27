@@ -11,7 +11,7 @@
 
 ## Sobre 
 
-A ideia do projeto mostrar a ligação *(link)* entre artistas, com base nas bandas que participaram. E para fazer isso utilizamos o algoritmo **Breadth First Search (BFS)** para gerar todas as ligações de um artista ao outro.
+A ideia do projeto é mostrar a ligação *(link)* entre artistas, com base nas bandas que participaram. E para fazer isso utilizamos o algoritmo **Breadth First Search (BFS)** para gerar todas as ligações de um artista ao outro.
 
 Ao escolher os dois artistas que deseja fazer a ligação, a aplicação mostrará um grafo com o caminho de um artista ao outro, sendo que os nós em vermelho serão os artistas e os azuis as bandas.
 
