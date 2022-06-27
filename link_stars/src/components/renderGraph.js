@@ -7,15 +7,15 @@ export default class GraphRender extends React.Component {
     const layout = {
       name: "circle",
     };
+    const { lastXpos } = this.props;
 
     const elements = formattedGraph;
     return (
       <CytoscapeComponent
         elements={elements}
         style={{
-          width: "100%",
+          width: lastXpos,
           height: "700px",
-          backgroundSize: "100%",
         }}
         layout={layout}
       />

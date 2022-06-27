@@ -11,6 +11,7 @@ import bandsData from "./data/bandsData";
 const mapOfArtists = new Map();
 const mapOfBands = new Map();
 const hashTable = new Map();
+let lastXpos = 0;
 
 function buildGraph() {
   let graph = new Graph();
@@ -126,6 +127,7 @@ function formatGraph(nodeList) {
     finalGraph.push({ data });
   }
 
+  lastXpos = xPos + 100;
   return finalGraph;
 }
 
@@ -180,7 +182,7 @@ function App() {
           onClick={handler}
         />
       </div>
-      <GraphRender elements={finalGraph} />
+      <GraphRender elements={finalGraph} lastXpos={lastXpos} />
     </>
   );
 }
