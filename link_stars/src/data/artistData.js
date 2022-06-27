@@ -1,11 +1,3 @@
-import dave_picture from "../assets/dave-mustaine.jpeg";
-import james_picture from "../assets/james-hetfield.jpeg";
-import kirk_picture from "../assets/kirk-hemmet.jpeg";
-import robert_picture from "../assets/robert-trujillo.jpeg";
-import jason_becker from "../assets/jason-becker.jpeg";
-//import metallica_picture from "./assets/metallica.jpg";
-import frank_zappa_picture from "../assets/frank-zappa.jpg";
-
 const artistsData = [
   {
     id: "a_1",
@@ -18,14 +10,12 @@ const artistsData = [
     name: "James Hetfield",
     bands: ["Metallica"],
     musical_class: "vocalist",
-    picture: james_picture,
   },
   {
     id: "a_4",
-    name: "Kirk Hemmet",
+    name: "Kirk Hemmett",
     bands: ["Metallica"],
     musical_class: "Solo guitarrist",
-    picture: kirk_picture,
   },
   {
     id: "a_5",
@@ -38,14 +28,12 @@ const artistsData = [
     name: "Robert Trujillo",
     bands: ["Metallica"],
     musical_class: "Bassist",
-    picture: robert_picture,
   },
   {
     id: "a_7",
     name: "Dave Mustaine",
     bands: ["Metallica", "Megadeth"],
     musical_class: "Vocalist",
-    picture: dave_picture,
   },
   {
     id: "a_8",
@@ -58,35 +46,30 @@ const artistsData = [
     name: "Jason Becker",
     bands: ["Cacophony"],
     musical_class: "Solo guitarrist",
-    picture: jason_becker,
   },
   {
     id: "a_10",
     name: "David Lee Roth",
     bands: ["David Lee Roth Band", "Van Halen"],
     musical_class: "Vocalist",
-    picture: null,
   },
   {
     id: "a_11",
     name: "Eddie Van Halen",
     bands: ["Van Halen"],
     musical_class: "Lead Guitarrist",
-    picture: null,
   },
   {
     id: "a_12",
     name: "Steve Vai",
     bands: ["David Lee Roth Band", "Frank Zappa"],
     musical_class: "Lead Guitarrist",
-    picture: null,
   },
   {
     id: "a_13",
     name: "Frank Zappa",
     bands: ["Frank Zappa"],
     musical_class: "Vocalist",
-    picture: frank_zappa_picture,
   },
   {
     id: "a_14",
