@@ -131,7 +131,7 @@ function formatGraph(nodeList) {
 
 function App() {
   const [art1, setArt1] = useState("James Hetfield");
-  const [art2, setArt2] = useState("Kirk Hemmet");
+  const [art2, setArt2] = useState("Kirk Hemmett");
   const [finalGraph, setFinalGraph] = useState([]);
   let graph;
   let bfsTree;

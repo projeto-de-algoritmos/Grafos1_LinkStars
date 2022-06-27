@@ -11,7 +11,7 @@ const bandsData = [
     genre: "Thrash Metal",
     members: [
       "James Hetfield",
-      "Kirk Hemmet",
+      "Kirk Hemmett",
       "Robert Trujillo",
       "Lars Ulrich",
       "Dave Mustaine",
