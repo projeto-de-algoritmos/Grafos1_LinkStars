@@ -4,7 +4,7 @@ dkc := "docker-compose.yml"
 build:
 	docker-compose -f ${dkc} build
 
-run: build
+run:
 	docker-compose -f ${dkc} up
 
 clean:
