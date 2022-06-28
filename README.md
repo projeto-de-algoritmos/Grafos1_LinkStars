@@ -57,7 +57,9 @@ Clonar o repositório do projeto com o comando:
 git clone https://github.com/projeto-de-algoritmos/Grafos1_LinkStars.git
 ```
 
-É possível rodar o projeto utilizando o docker ou utilizando o npm diretamente
+É possível rodar o projeto utilizando o docker ou utilizando o npm diretamente:
+
+### Diretamente com npm:
 
 Primeiro entre na pasta do projeto:
 ```
@@ -77,7 +79,7 @@ Acesse no navegador:
 http://localhost:3000/
 ```
 
-Utilizando o Docker você deve realizar os seguintes comandos:
+### Docker:
 
 Primeiro entre na pasta do projeto:
 
@@ -97,6 +99,8 @@ Acesse no navegador:
 http://localhost/
 ```
 
+### Make + Docker:
+
 Também é possível utilizar o Docker utilizando o Makefile caso tenha o Make instalado realizando o seguinte comando:
 
 ```
@@ -109,7 +113,7 @@ Para remover os containers utilizando o Make, basta usar o seguinte comando:
 make clean
 ```
 
-## Uso 
+## Uso
 
 Primeiro acesse a aplicação (Acesse no navegador: http://localhost:3000 sem docker e http://localhost com docker), abrindo a aplicação pode-se escolher 2 artistas diferentes e, caso exista alguma ligação entre eles com base nos dados da aplicação, o grafo que demonstra tal ligação, aparecerá na tela, caso não exista, um alerta informará ao usuário.
 
