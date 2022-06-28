@@ -113,6 +113,11 @@ Para remover os containers utilizando o Make, basta usar o seguinte comando:
 make clean
 ```
 
+Acesse no navegador:
+```
+http://localhost/
+```
+
 ## Uso
 
 Primeiro acesse a aplicação (Acesse no navegador: http://localhost:3000 sem docker e http://localhost com docker), abrindo a aplicação pode-se escolher 2 artistas diferentes e, caso exista alguma ligação entre eles com base nos dados da aplicação, o grafo que demonstra tal ligação, aparecerá na tela, caso não exista, um alerta informará ao usuário.
