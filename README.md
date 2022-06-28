@@ -61,7 +61,7 @@ git clone https://github.com/projeto-de-algoritmos/Grafos1_LinkStars.git
 
 Primeiro entre na pasta do projeto:
 ```
-cd link_stars/
+cd Grafos1_LinkStars/link_stars
 ```
 Instale as dependências do projeto:
 ```
@@ -71,13 +71,18 @@ Por fim, para iniciar o projeto:
 ```
 npm start
 ```
+Acesse no navegador:
+
+```
+http://localhost:3000/
+```
 
 Utilizando o Docker você deve realizar os seguintes comandos:
 
 Primeiro entre na pasta do projeto:
 
 ```
-cd link_stars/
+cd Grafos1_LinkStars/link_stars
 ```
 
 Realize o build da imagem e suba o container:
@@ -85,6 +90,13 @@ Realize o build da imagem e suba o container:
 ```
 docker-compose up
 ```
+
+Acesse no navegador:
+
+```
+http://localhost/
+```
+
 Também é possível utilizar o Docker utilizando o Makefile caso tenha o Make instalado realizando o seguinte comando:
 
 ```
@@ -97,11 +109,13 @@ Para remover os containers utilizando o Make, basta usar o seguinte comando:
 make clean
 ```
 
-Após a inicialização do projeto, deve-se abrir automaticamente uma página em http://localhost:3000/, e se tiver subido utilizando o docker, deve-se acessar em http://localhost/ pois o docker está conectado ao nginx, que está fazendo o redirecionamento automaticamente para a porta 3000.
-
 ## Uso 
 
-Abrindo a aplicação, pode-se escolher 2 artistas diferentes e, caso exista alguma ligação entre eles com base nos dados da aplicação, o grafo que demonstra tal ligação, aparecerá na tela, caso não exista, um alerta informará ao usuário.
+Primeiro acesse a aplicação (Acesse no navegador: http://localhost:3000 sem docker e http://localhost com docker), abrindo a aplicação pode-se escolher 2 artistas diferentes e, caso exista alguma ligação entre eles com base nos dados da aplicação, o grafo que demonstra tal ligação, aparecerá na tela, caso não exista, um alerta informará ao usuário.
+
+## Apresentação
+
+A apresentação está na raiz do repositorio [Apresentação_Grafos1.mp4](./Apresentacao_Grafos1.mp4)
 
 
 
