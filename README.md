@@ -107,15 +107,15 @@ Também é possível utilizar o Docker utilizando o Makefile caso tenha o Make i
 make run
 ```
 
+Acesse no navegador:
+```
+http://localhost/
+```
+
 Para remover os containers utilizando o Make, basta usar o seguinte comando:
 
 ```
 make clean
-```
-
-Acesse no navegador:
-```
-http://localhost/
 ```
 
 ## Uso
